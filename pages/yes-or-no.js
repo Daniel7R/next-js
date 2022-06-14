@@ -6,7 +6,7 @@ import { Header, Button } from 'semantic-ui-react'
 import Layout from '@components/Layout/Layout'
 
 const fetchResult = async () => {
-  const res = await fetch('http://localhost:3005/api/yes-or-no')
+  const res = await fetch('https://next-js-mu-one.vercel.app/api/avo/api/yes-or-no')
   const { data } = await res.json()
 
   return data

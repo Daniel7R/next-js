@@ -7,7 +7,7 @@ const ProductList = ({ products }) => (
   <Card.Group itemsPerRow={2} stackable>
     {products.map( p => {
       return (
-        <Link key={p.id} href="/product/[id]" as={`/product/${p.id}`} >
+        <Link key={p.id} href={`/product/${p.id}`} >
           <Card
             as="a"
             header={p.name}
