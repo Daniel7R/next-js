@@ -7,8 +7,7 @@ const Home = () => {
   const [productList, setProductList] = React.useState([]);
 
   React.useEffect(() => {
-    window
-      .fetch("/api/avo")
+    fetch("/api/avo")
       .then(response => response.json())
       .then(({data}) => setProductList(data));
   }, []);

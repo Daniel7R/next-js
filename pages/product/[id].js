@@ -2,6 +2,7 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import Layout from '@components/Layout/Layout';
 import ProductSummary from '@components/ProductSummary/ProductSummary';
+import fetch from 'isomorphic-unfetch'
 
 const ProductItem = () => {
   const [aguacate, setAguacate]= React.useState();
@@ -12,7 +13,7 @@ const ProductItem = () => {
   = useRouter();
 
   React.useEffect(() => {
-    id && window.fetch(`/api/avo/${id}`)
+    id && fetch(`/api/avo/${id}`)
             .then(response => response.json())
             .then(({entry}) => setAguacate(entry) )
             .catch(err => console.error(err))
