@@ -4,22 +4,32 @@ import Layout from '@components/Layout/Layout';
 import ProductSummary from '@components/ProductSummary/ProductSummary';
 import fetch from 'isomorphic-unfetch'
 
-const ProductItem = () => {
-  const [aguacate, setAguacate]= React.useState();
+export const getStaticPaths= async() => {
+  const response= await fetch("https://next-js-mu-one.vercel.app/api/avo")
+  const {data: productList} = await response.json();
+  const paths= productList.map(product => ({
+    params: {
+      id: product.id
+    }
+  }))
 
-  const {
-    query: {id}
+  return {
+    paths,
+    fallback: false
   }
-  = useRouter();
+}
 
-  React.useEffect(() => {
-    id && fetch(`/api/avo/${id}`)
-            .then(response => response.json())
-            .then(({entry}) => setAguacate(entry) )
-            .catch(err => console.error(err))
-  }, [id])
+export const getStaticProps= async({params}) => {
+  const response= await fetch(`https://next-js-mu-one.vercel.app/api/avo/${params.id}`)
+  const {entry: aguacate}= await response.json()
+  return {
+    props: {
+      aguacate
+    }
+  }
+}
 
-  console.log(aguacate);
+const ProductItem = ({aguacate}) => {
 
   return (
     <Layout>
